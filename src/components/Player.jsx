@@ -42,37 +42,42 @@ export default function Player({ symbol, initialPlayerName, onChangePlayerName, 
 					isValidName: true,
 					errNumber: 0,
 				}))
-					onChangePlayerName(symbol, enteredName)
+				onChangePlayerName(symbol, enteredName)
 			}
 		}
 	}
 
 	return (
 		<div className='relative text-white p-1'>
-			<p className={`text-xl mb-3 p-1 ${activePlayer ? 'border-b-2 border-primarycolor' : ''}`}>
+			<p
+				className={`text-sm  md:text-xl mb-3 p-1 ${
+					activePlayer ? 'border-b-2 border-primarycolor' : 'border-b-2 border-transparent'
+				}`}>
 				{player.editable ? (
 					<input
 						type='text'
 						ref={inputRef}
-						className={`${!player.isValidName ? 'border-2 border-red-500' : ''} text-black mr-2 w-40`}
+						className={`${
+							!player.isValidName ? 'border-2 border-red-500' : ''
+						} text-black mr-2 w-20 md:w-32 bg-secondarycolor rounded pl-1 `}
 					/>
 				) : (
 					<span className='mr-2'>{player.name}</span>
 				)}
 				<button
-					className='text-secondarycolor transition-colors duration-300 text-base hover:text-white'
+					className='text-secondarycolor transition-colors duration-300 text-xs md:text-base hover:text-white'
 					onClick={handleEditPlayer}>
 					{player.editable ? 'Save' : 'Edit'}{' '}
 				</button>
 			</p>
 			{!player.isValidName && (
-				<p className='absolute top-11 left-2 text-red-500 text-xs'>
-					{`${player.errNumber === 1 ? 'Name cannot be empty' : ''}${
-						player.errNumber === 2 ? 'Name cannot have more than 12 characters' : ''
+				<p className='absolute top-[38px] md:top-[46px] text-red-500 text-xs'>
+					{`${player.errNumber === 1 ? `Name can't be empty.` : ''}${
+						player.errNumber === 2 ? 'Max. 12 characters.' : ''
 					}`}
 				</p>
 			)}
-			<p>Symbol: {symbol}</p>
+			<p className='text-xs md:text-xl mt-3'>Symbol: {symbol}</p>
 		</div>
 	)
 }
